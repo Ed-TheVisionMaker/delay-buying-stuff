@@ -1,5 +1,8 @@
 import Image from 'next/image';
 import config from '@/config';
+import ButtonLead from "@/components/ButtonLead";
+
+
 
 const Hero = () => {
   return (
@@ -12,9 +15,10 @@ const Hero = () => {
           Plug the leaks in your spending habits and see how much you can save.
           And have fun along the way, saving those $$$!
         </p>
-        <button className='btn btn-primary btn-wide'>
+        {/* <button className='btn btn-primary btn-wide'>
           Get {config.appName}
-        </button>
+        </button> */}
+        <ButtonLead />
       </div>
       <div className='lg:w-full'>
         <Image
