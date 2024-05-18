@@ -2,7 +2,7 @@ import themes from "daisyui/src/theming/themes";
 
 const config = {
   // REQUIRED
-  appName: "Delay & Save",
+  appName: "Impulse Buy SOS",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
     "Plug the leaks in your spending habits and see how much you can save. And have fun along the way, saving those $$$!",
