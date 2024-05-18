@@ -7,7 +7,10 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install",
+    "precommit": "pretty-quick --staged && lint-staged",
+    "prettier": "npx prettier --config .prettierrc --write"
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^1.0.0",
@@ -36,7 +39,20 @@
   "devDependencies": {
     "autoprefixer": "^10.4.19",
     "daisyui": "^4.10.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.2",
     "postcss": "^8.4.38",
+    "prettier": "^3.2.5",
     "tailwindcss": "^3.4.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "npx prettier --config .prettierrc --write"
+    ]
   }
 }
