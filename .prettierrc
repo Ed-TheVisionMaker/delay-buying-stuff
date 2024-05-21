@@ -1,6 +1,5 @@
 {
     "parser": "babel",
-    "arrowParens": "avoid",
     "trailingComma": "none",
     "singleQuote": true,
     "semi": true,
