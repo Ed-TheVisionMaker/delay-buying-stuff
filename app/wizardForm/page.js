@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import SmileyRating from '@/components/SmileyRating';
+import ViewFormStep from '@/components/ViewFormStep';
 
 export const formSchema = z.object({
 	item: z.string().min(1, 'Please enter an item here'),
@@ -113,10 +114,12 @@ const WizardForm = () => {
 				</p>
 				<SmileyRating name='' />
 			</div>
-			{/* <Viewer /> */}
+			<ViewFormStep />
 		</form>
 	);
 };
+
+export default WizardForm;
 
 // setting up server side validation
 

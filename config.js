@@ -98,23 +98,34 @@ const config = {
 	},
 	steps: [
 		{
-			question: 'How is your life without this item?',
+			questionElement: <p>How is your life without this item?</p>,
 			stateProperty: 'withoutItem'
 		},
 		{
-			question: 'In 6 months time how will this item change your life?',
+			questionElement: (
+				<p className=''>
+					In{' '}
+					<span className='bg-neutral text-neutral-content'>6 months time</span>{' '}
+					how will this item change your life?
+				</p>
+			),
 			stateProperty: 'lifeChange'
 		},
 		{
-			question: 'How will it really change your life?',
+			questionElement: <p className=''>How will it really change your life?</p>,
 			stateProperty: 'reallyChangeLife'
 		},
 		{
-			question: 'What is the last thing you regretted buying?',
+			questionElement: 'What is the last thing you regretted buying?',
 			stateProperty: 'regretBuying'
 		},
 		{
-			question: 'If you never owned this item, what would happen to your life?',
+			questionElement: (
+				<p className=''>
+					If you <span className='bg-neutral text-neutral-content'>never</span>{' '}
+					owned this item, what would happen to your life?
+				</p>
+			),
 			stateProperty: 'neverOwned'
 		}
 	]
