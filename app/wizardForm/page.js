@@ -7,21 +7,18 @@ import SmileyRating from '@/components/SmileyRating';
 
 export const formSchema = z.object({
 	item: z.string().min(1, 'Please enter an item here'),
+	regretBuying: z.string().min(1, 'Please enter an item here'),
 	smileyRatings: z.object({
-		rating: z
+		withoutItem: z
 			.number()
 			.min(1, 'Please select a rating')
 			.max(5, 'Invalid rating'),
-		regretItem: z.string().min(1, 'Please enter an item here'),
-		lifeWithout: z
-			.number()
-			.min(1, 'Please select a rating')
-			.max(5, 'Invalid rating'),
-		lifeChange: z
-			.number()
-			.min(1, 'Please select a rating')
-			.max(5, 'Invalid rating'),
+		lifeChange: z.string().min(1, 'Please enter an item here'),
 		reallyChangeLife: z
+			.number()
+			.min(1, 'Please select a rating')
+			.max(5, 'Invalid rating'),
+		neverOwned: z
 			.number()
 			.min(1, 'Please select a rating')
 			.max(5, 'Invalid rating')
@@ -45,12 +42,12 @@ const WizardForm = () => {
 
 	const [formData, setFormData] = useState({
 		item: '',
+		regretBuying: '',
 		smileyRatings: {
 			withOutItem: 0,
-			changeLife: '',
-			lifeWithout: 0,
 			lifeChange: 0,
-			reallyChangeLife: 0
+			reallyChangeLife: 0,
+			neverOwned: 0
 		}
 	});
 
