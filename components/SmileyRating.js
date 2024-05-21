@@ -1,7 +1,6 @@
-import { useForm } from 'react-hook-form';
-
+import { useFormContext } from 'react-hook-form';
 const SmileyRating = ({ name }) => {
-	const { setValue, value } = useForm();
+	const { setValue } = useFormContext();
 	const smileys = [
 		{ emoji: '😞', label: 'Very Dissatisfied', rating: 1 },
 		{ emoji: '😟', label: 'Dissatisfied', rating: 2 },
@@ -15,7 +14,7 @@ const SmileyRating = ({ name }) => {
 			{smileys.map((smiley, index) => (
 				<button
 					key={index}
-					onClick={() => setValue(name, smiley.value)}
+					onClick={() => setValue(name, smiley.rating)}
 					aria-label={smiley.label}
 					className={'text-4xl mx-2'}
 				>
