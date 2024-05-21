@@ -48,6 +48,10 @@ const WizardForm = () => {
 	// 	reset();
 	// };
 
+	const onSubmit = (data) => {
+		console.log(data);
+	};
+
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
