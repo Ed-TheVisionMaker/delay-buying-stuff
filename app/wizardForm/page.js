@@ -7,8 +7,25 @@ import SmileyRating from '@/components/SmileyRating';
 
 export const formSchema = z.object({
 	item: z.string().min(1, 'Please enter an item here'),
-	rating: z.number().min(1, 'Please select a rating'),
-	regretItem: z.string().min(1, 'Please enter item here')
+	smileyRatings: z.object({
+		rating: z
+			.number()
+			.min(1, 'Please select a rating')
+			.max(5, 'Invalid rating'),
+		regretItem: z.string().min(1, 'Please enter an item here'),
+		lifeWithout: z
+			.number()
+			.min(1, 'Please select a rating')
+			.max(5, 'Invalid rating'),
+		lifeChange: z
+			.number()
+			.min(1, 'Please select a rating')
+			.max(5, 'Invalid rating'),
+		reallyChangeLife: z
+			.number()
+			.min(1, 'Please select a rating')
+			.max(5, 'Invalid rating')
+	})
 });
 
 // setup a viewer that accepts an array of components
@@ -19,22 +36,22 @@ const WizardForm = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors, isSubmitting },
-		setValue
+		formState: { errors, isSubmitting }
 		// reset,
 		// setError
 	} = useForm({
 		resolver: zodResolver(formSchema)
-		// defaultValues: {
-		// 	item: '',
-		// 	rating: 0
-		// }
 	});
 
 	const [formData, setFormData] = useState({
 		item: '',
-		rating: 0,
-		regretItem: ''
+		smileyRatings: {
+			withOutItem: 0,
+			changeLife: '',
+			lifeWithout: 0,
+			lifeChange: 0,
+			reallyChangeLife: 0
+		}
 	});
 
 	const [step, setStep] = useState(1);
@@ -69,7 +86,7 @@ const WizardForm = () => {
 			</div>
 			<div className='flex flex-col items-center border-2 border-neutral p-8'>
 				<p>How is your life without this item?</p>
-				<SmileyRating formData={formData} setFormData={setFormData} />
+				<SmileyRating name='' />
 			</div>
 			<div className='flex flex-col items-center border-2 border-neutral p-8'>
 				<p className=''>
@@ -77,11 +94,11 @@ const WizardForm = () => {
 					<span className='bg-neutral text-neutral-content'>6 months time</span>{' '}
 					how will this item change your life?
 				</p>
-				<SmileyRating formData={formData} setFormData={setFormData} />
+				<SmileyRating name='' />
 			</div>
 			<div className='flex flex-col items-center border-2 border-neutral p-8'>
 				<p className=''>How will it really change your life?</p>
-				<SmileyRating formData={formData} setFormData={setFormData} />
+				<SmileyRating name='' />
 			</div>
 			<div className='flex flex-col border-2 border-neutral p-8'>
 				What is the last thing you regretted buying?
@@ -97,7 +114,7 @@ const WizardForm = () => {
 					If you <span className='bg-neutral text-neutral-content'>never</span>{' '}
 					owned this item, what would happen to your life?
 				</p>
-				<SmileyRating formData={formData} setFormData={setFormData} />
+				<SmileyRating name='' />
 			</div>
 			{/* <Viewer /> */}
 		</form>
