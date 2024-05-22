@@ -6,11 +6,18 @@ import React from 'react';
 const ViewFormStep = () => {
 	const {
 		getValues,
+		setValue,
 		register,
 		formState: { errors, isSubmitting }
 	} = useFormContext();
 
 	const currentStep = getValues('step');
+
+	const nextStep = () => {
+		if (currentStep < stepsConfig.length - 1) {
+			setValue('step', currentStep + 1);
+		}
+	};
 
 	const stepsConfig = [
 		{
@@ -28,6 +35,7 @@ const ViewFormStep = () => {
 						type='submit'
 						disabled={isSubmitting}
 						className='px-4 py-2 rounded'
+						onClick={() => setValue('step', currentStep + 1)}
 					>
 						submit
 					</button>
@@ -86,14 +94,6 @@ const ViewFormStep = () => {
 	];
 	return (
 		<>
-			{/* {stepsConfig.map((step) => (
-				<div key={step.stateProperty} className='border-2 border-neutral p-8'>
-					{step.questionElement}
-					{step.smileyRatingUsed === true ? (
-						<SmileyRating name={step.stateProperty} />
-					) : null}
-				</div>
-			))} */}
 			{
 				<div
 					key={stepsConfig[currentStep - 1].stateProperty}
@@ -101,7 +101,10 @@ const ViewFormStep = () => {
 				>
 					{stepsConfig[currentStep - 1].questionElement}
 					{stepsConfig[currentStep - 1].smileyRatingUsed === true ? (
-						<SmileyRating name={stepsConfig[currentStep - 1].stateProperty} />
+						<SmileyRating
+							nextStep={nextStep}
+							name={stepsConfig[currentStep - 1].stateProperty}
+						/>
 					) : null}
 				</div>
 			}

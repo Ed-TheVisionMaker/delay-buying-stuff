@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-const SmileyRating = ({ name }) => {
+const SmileyRating = ({ name, nextStep }) => {
 	const { setValue } = useFormContext();
 	const smileys = [
 		{ emoji: '😞', label: 'Very Dissatisfied', rating: 1 },
@@ -9,18 +9,26 @@ const SmileyRating = ({ name }) => {
 		{ emoji: '😊', label: 'Very Satisfied', rating: 5 }
 	];
 
+	const handleSmileyClick = (rating) => {
+		nextStep();
+		setValue(name, rating);
+	};
+
 	return (
 		<div className='flex justify-center mt-4'>
-			{smileys.map((smiley, index) => (
-				<button
-					key={index}
-					onClick={() => setValue(name, smiley.rating)}
-					aria-label={smiley.label}
-					className={'text-4xl mx-2'}
-				>
-					{smiley.emoji}
-				</button>
-			))}
+			{smileys.map((smiley, index) => {
+				const { rating, label, emoji } = smiley;
+				return (
+					<button
+						key={index}
+						onClick={() => handleSmileyClick(rating)}
+						aria-label={label}
+						className={'text-4xl mx-2'}
+					>
+						{emoji}
+					</button>
+				);
+			})}
 		</div>
 	);
 };
