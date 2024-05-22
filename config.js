@@ -95,40 +95,7 @@ const config = {
 		loginUrl: '/api/auth/signin',
 		// REQUIRED — the path you want to redirect users after successfull login (i.e. /dashboard, /private). This is normally a private page for users to manage their accounts. It's used in apiClient (/libs/api.js) upon 401 errors from our API & in ButtonSignin.js
 		callbackUrl: '/dashboard'
-	},
-	steps: [
-		{
-			questionElement: <p>How is your life without this item?</p>,
-			stateProperty: 'withoutItem'
-		},
-		{
-			questionElement: (
-				<p className=''>
-					In{' '}
-					<span className='bg-neutral text-neutral-content'>6 months time</span>{' '}
-					how will this item change your life?
-				</p>
-			),
-			stateProperty: 'lifeChange'
-		},
-		{
-			questionElement: <p className=''>How will it really change your life?</p>,
-			stateProperty: 'reallyChangeLife'
-		},
-		{
-			questionElement: 'What is the last thing you regretted buying?',
-			stateProperty: 'regretBuying'
-		},
-		{
-			questionElement: (
-				<p className=''>
-					If you <span className='bg-neutral text-neutral-content'>never</span>{' '}
-					owned this item, what would happen to your life?
-				</p>
-			),
-			stateProperty: 'neverOwned'
-		}
-	]
+	}
 };
 
 export default config;

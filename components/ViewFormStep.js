@@ -14,7 +14,7 @@ const ViewFormStep = () => {
 	const currentStep = getValues('step');
 
 	const nextStep = () => {
-		if (currentStep < stepsConfig.length - 1) {
+		if (currentStep < stepsConfig.length) {
 			setValue('step', currentStep + 1);
 		}
 	};
@@ -35,9 +35,9 @@ const ViewFormStep = () => {
 						type='submit'
 						disabled={isSubmitting}
 						className='px-4 py-2 rounded'
-						onClick={() => setValue('step', currentStep + 1)}
+						onClick={() => nextStep()}
 					>
-						submit
+						next
 					</button>
 				</div>
 			),
@@ -71,11 +71,19 @@ const ViewFormStep = () => {
 				<div className='flex flex-col'>
 					What is the last thing you regretted buying?
 					<input
-						{...register('regretItem')}
+						{...register('regretBuying')}
 						type='text'
 						placeholder='The last regret...'
 						className='px-4 py-2 rounded border-2'
 					/>
+					<button
+						type='submit'
+						disabled={isSubmitting}
+						className='px-4 py-2 rounded'
+						onClick={() => nextStep()}
+					>
+						next
+					</button>
 				</div>
 			),
 			stateProperty: 'regretBuying',
@@ -97,7 +105,7 @@ const ViewFormStep = () => {
 			{
 				<div
 					key={stepsConfig[currentStep - 1].stateProperty}
-					className='border-2 border-neutral p-8'
+					className='flex flex-col items-center justify-center border-2 border-neutral p-8'
 				>
 					{stepsConfig[currentStep - 1].questionElement}
 					{stepsConfig[currentStep - 1].smileyRatingUsed === true ? (
@@ -106,6 +114,7 @@ const ViewFormStep = () => {
 							name={stepsConfig[currentStep - 1].stateProperty}
 						/>
 					) : null}
+					<pre>{JSON.stringify(getValues(), null, 2)}</pre>
 				</div>
 			}
 		</>

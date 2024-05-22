@@ -41,9 +41,7 @@ const WizardForm = () => {
 	});
 
 	const {
-		getValues,
 		handleSubmit,
-		register,
 		formState: { errors, isSubmitting }
 	} = methods;
 
