@@ -5,9 +5,13 @@ import React from 'react';
 
 const ViewFormStep = () => {
 	const {
+		getValues,
 		register,
 		formState: { errors, isSubmitting }
 	} = useFormContext();
+
+	const currentStep = getValues('step');
+
 	const stepsConfig = [
 		{
 			questionElement: (
@@ -82,14 +86,25 @@ const ViewFormStep = () => {
 	];
 	return (
 		<>
-			{stepsConfig.map((step) => (
+			{/* {stepsConfig.map((step) => (
 				<div key={step.stateProperty} className='border-2 border-neutral p-8'>
 					{step.questionElement}
 					{step.smileyRatingUsed === true ? (
 						<SmileyRating name={step.stateProperty} />
 					) : null}
 				</div>
-			))}
+			))} */}
+			{
+				<div
+					key={stepsConfig[currentStep - 1].stateProperty}
+					className='border-2 border-neutral p-8'
+				>
+					{stepsConfig[currentStep - 1].questionElement}
+					{stepsConfig[currentStep - 1].smileyRatingUsed === true ? (
+						<SmileyRating name={stepsConfig[currentStep - 1].stateProperty} />
+					) : null}
+				</div>
+			}
 		</>
 	);
 };
