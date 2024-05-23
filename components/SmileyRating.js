@@ -25,24 +25,21 @@ const SmileyRating = ({ name }) => {
 	const ratingSelected = getValues(name) || null;
 
 	const ratingIsSelected = ratingSelected !== null;
-	// console.log(ratingIsSelected, "rating is sledcted")
 
 	return (
-		<div className='w-full flex justify-evenly mt-4'>
+		<div className='w-full flex justify-between mt-4 mb-6 border border-pink-400'>
 			{smileys.map((smiley, index) => {
 				const { rating, label, emoji } = smiley;
 				return (
-					<>
-						<button
-							key={index}
-							onClick={() => setValue(name, rating)}
-							aria-label={label}
-							className={`text-4xl mx-2 mb-6 ${rating === ratingSelected ? 'scale-150' : 'scale-125'} hover:scale-150`}
-							disabled={isSubmitting}
-						>
-							{emoji}
-						</button>
-					</>
+					<button
+						key={index}
+						onClick={() => setValue(name, rating)}
+						aria-label={label}
+						className={`w-fit border border-pink-400 text-5xl ${rating === ratingSelected ? 'scale-150' : 'scale-125'} hover:scale-150`}
+						disabled={isSubmitting}
+					>
+						{emoji}
+					</button>
 				);
 			})}
 			{ratingIsSelected ? null : <SmileyError name={name} />}

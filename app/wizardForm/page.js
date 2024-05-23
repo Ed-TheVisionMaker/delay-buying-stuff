@@ -60,7 +60,7 @@ const WizardForm = () => {
 			<FormProvider {...methods}>
 				<form
 					onSubmit={handleSubmit(onSubmit)}
-					className='w-full flex flex-col items-center justify-center'
+					className='w-full flex flex-col items-center'
 				>
 					<ViewFormStep />
 				</form>

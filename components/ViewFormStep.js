@@ -203,7 +203,7 @@ const ViewFormStep = () => {
 				<div className='h-full w-3/5 px-8 pt-12 rounded-xl mb-12 text-center'>
 					<div
 						key={stepsConfig[currentStep - 1].stateProperty}
-						className='h-full w-full flex flex-col justify-between text-xl'
+						className='h-full w-full flex flex-col items-center text-xl'
 					>
 						{stepsConfig[currentStep - 1].questionElement}
 						{stepsConfig[currentStep - 1].smileyRatingUsed === true ? (
