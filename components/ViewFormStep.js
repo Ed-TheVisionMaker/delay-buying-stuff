@@ -18,15 +18,60 @@ const StepProgressBar = ({ totalSteps }) => {
 };
 
 const StepButton = ({ stepFunction }) => {
+	const svgConfig = {
+		moveRight: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				width={12}
+				height={12}
+				viewBox='0 0 24 24'
+				fill='none'
+				stroke='currentColor'
+				strokeWidth={2}
+				strokeLinecap='round'
+				strokeLinejoin='round'
+				className=''
+			>
+				<path d='M18 8l4 4-4 4M2 12h20' />
+			</svg>
+		),
+		moveLeft: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				width={12}
+				height={12}
+				viewBox='0 0 24 24'
+				fill='none'
+				stroke='currentColor'
+				strokeWidth={2}
+				strokeLinecap='round'
+				strokeLinejoin='round'
+				className=''
+			>
+				<path d='M6 8l-4 4 4 4M2 12h20' />
+			</svg>
+		)
+	};
 	const nextStep = stepFunction.name === 'nextStep';
 	return (
-		<button
-			type='submit'
-			className={`absolute border border-black px-4 py rounded-xl bottom-0 ${nextStep ? 'right-0' : 'left-0'}`}
-			onClick={() => stepFunction()}
-		>
-			{nextStep ? 'Next' : 'Prev'}
-		</button>
+		<div className='flex'>
+			<button
+				type='submit'
+				className={`border border-black px-4 py rounded-xl bottom-0 ${nextStep ? 'right-0' : 'left-0'}`}
+				onClick={() => stepFunction()}
+			>
+				{nextStep ? (
+					<p className='flex items-center text-sm'>
+						Next<span className='mr-l'>{svgConfig.moveRight}</span>
+					</p>
+				) : (
+					<p className='flex items-center text-sm'>
+						{svgConfig.moveLeft}
+						<span className='ml-2'>Back</span>
+					</p>
+				)}
+			</button>
+		</div>
 	);
 };
 
@@ -60,10 +105,11 @@ const ViewFormStep = () => {
 		{
 			questionElement: (
 				<div className='flex flex-col items-center justify-center'>
+					<h3 className='text-2xl'>What do you want to buy&#63;</h3>
 					<input
 						{...register('item')}
 						type='text'
-						placeholder='What do you want to buy?'
+						placeholder='Type your answer here...'
 						className='px-4 py-2 rounded border-2'
 					/>
 					{/* maybe make a ternary here see Fred linked in */}
@@ -75,7 +121,7 @@ const ViewFormStep = () => {
 		},
 
 		{
-			questionElement: <p>How is your life without this item?</p>,
+			questionElement: <p>How is your life without this item&#63;</p>,
 			stateProperty: 'withoutItem',
 			smileyRatingUsed: true
 		},
@@ -84,25 +130,27 @@ const ViewFormStep = () => {
 				<p className=''>
 					In{' '}
 					<span className='bg-neutral text-neutral-content'>6 months time</span>{' '}
-					how will this item change your life?
+					how will this item change your life&#63;
 				</p>
 			),
 			stateProperty: 'lifeChange',
 			smileyRatingUsed: true
 		},
 		{
-			questionElement: <p className=''>How will it really change your life?</p>,
+			questionElement: (
+				<p className=''>How will it really change your life&#63;</p>
+			),
 			stateProperty: 'reallyChangeLife',
 			smileyRatingUsed: true
 		},
 		{
 			questionElement: (
 				<div className='flex flex-col'>
-					What is the last thing you regretted buying?
+					<h3>What is the last thing you regretted buying&#63;</h3>
 					<input
 						{...register('regretBuying')}
 						type='text'
-						placeholder='The last regret...'
+						placeholder='Type your last regret here...'
 						className='px-4 py-2 rounded border-2'
 					/>
 				</div>
@@ -114,7 +162,7 @@ const ViewFormStep = () => {
 			questionElement: (
 				<p className=''>
 					If you <span className='bg-neutral text-neutral-content'>never</span>{' '}
-					owned this item, what would happen to your life?
+					owned this item, what would happen to your life&#63;
 				</p>
 			),
 			stateProperty: 'neverOwned',
@@ -127,10 +175,10 @@ const ViewFormStep = () => {
 	return (
 		<>
 			{
-				<div className=' h-96 w-96'>
+				<div className='h-48'>
 					<div
 						key={stepsConfig[currentStep - 1].stateProperty}
-						className='h-full w-full flex flex-col items-center justify-between border-2 border-neutral p-8 rounded-xl shadow-xl shadow-orange-300 text-xl'
+						className='h-full w-full flex flex-col items-center justify-between border border-neutral p-8 rounded-xl text-xl'
 					>
 						{stepsConfig[currentStep - 1].questionElement}
 						{stepsConfig[currentStep - 1].smileyRatingUsed === true ? (
@@ -140,7 +188,7 @@ const ViewFormStep = () => {
 							/>
 						) : null}
 						<div className='w-full '>
-							<div className='relative w-full mb-4'>
+							<div className='w-full mb-4'>
 								{currentStep > 1 ? (
 									<StepButton stepFunction={prevStep} />
 								) : null}
