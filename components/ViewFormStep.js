@@ -3,6 +3,20 @@ import { useFormContext } from 'react-hook-form';
 
 import React from 'react';
 
+const StepProgressBar = ({ totalSteps }) => {
+	const { getValues } = useFormContext();
+	const currentStep = getValues('step');
+	const progressBarWidth = Math.floor((currentStep / totalSteps) * 100);
+	return (
+		<div className='w-full h-2 flex justify-startmt-4 border border-black rounded-xl'>
+			<div
+				className={`rounded-xl bg-red-700`}
+				style={{ width: progressBarWidth + '%' }}
+			></div>
+		</div>
+	);
+};
+
 const ViewFormStep = () => {
 	const {
 		getValues,
@@ -100,6 +114,9 @@ const ViewFormStep = () => {
 			smileyRatingUsed: true
 		}
 	];
+
+	const totalSteps = stepsConfig.length;
+
 	return (
 		<>
 			{
@@ -114,6 +131,7 @@ const ViewFormStep = () => {
 							name={stepsConfig[currentStep - 1].stateProperty}
 						/>
 					) : null}
+					<StepProgressBar totalSteps={totalSteps} />
 					<pre>{JSON.stringify(getValues(), null, 2)}</pre>
 				</div>
 			}
