@@ -14,9 +14,8 @@ const features = [
 	{
 		title: 'Beat The Impulse',
 		description: `Follow science backed methods to prevent that purchase you don't want.`,
-		type: 'video',
-		path: 'https://d3m8mk7e1mf7xn.cloudfront.net/app/newsletter.webm',
-		format: 'video/webm',
+		type: 'image',
+		path: '/online-payment-merhanhaval22-by-Merhan Saeed.png',
 		svg: (
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
@@ -84,7 +83,7 @@ const Item = ({ feature, isOpen, setFeatureSelected }) => {
 		<li>
 			<button
 				className='relative flex gap-2 items-center w-full py-5 text-base font-medium text-left md:text-lg'
-				onClick={e => {
+				onClick={(e) => {
 					e.preventDefault();
 					setFeatureSelected();
 				}}
@@ -121,7 +120,7 @@ const Item = ({ feature, isOpen, setFeatureSelected }) => {
 // Video are set to autoplay for best UX.
 const Media = ({ feature }) => {
 	const { type, path, format, alt } = feature;
-	const style = 'rounded-2xl aspect-square w-full sm:w-[26rem]';
+	const style = 'rounded-2xl object-contain w-full sm:w-[26rem]';
 	const size = {
 		width: 500,
 		height: 500

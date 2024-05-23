@@ -7,7 +7,7 @@ import ViewFormStep from '@/components/ViewFormStep';
 
 export const formSchema = z.object({
 	step: z.number(),
-	// item: z.string().min(1, 'Please enter an item here'),
+	item: z.string().min(1, 'Please enter an item here'),
 	regretBuying: z.string().min(1, 'Please enter an item here'),
 	withoutItem: z
 		.number()
@@ -48,8 +48,8 @@ const WizardForm = () => {
 	};
 
 	return (
-		<div className='w-screen h-screen flex flex-col items-center bg-skyBlue/40'>
-			<h1 className='my-24 text-5xl '>Impulse Buy SOS</h1>
+		<div className='w-screen h-screen bg-skyBlue/40'>
+			<h1 className='ml-12 pt-6 pb-24 font-bold text-2xl '>Impulse Buy SOS</h1>
 			<FormProvider {...methods}>
 				<form
 					onSubmit={handleSubmit(onSubmit)}

@@ -1,6 +1,17 @@
 import { useFormContext } from 'react-hook-form';
+
+const SmileyError = ({ name }) => {
+	const {
+		formState: { errors }
+	} = useFormContext();
+	return <p className='text-red-500'>{errors[name].message}</p>;
+};
 const SmileyRating = ({ name }) => {
-	const { setValue, getValues } = useFormContext();
+	const {
+		setValue,
+		getValues,
+		formState: { errors, isSubmitting }
+	} = useFormContext();
 	const smileys = [
 		{ emoji: '😞', label: 'Very Dissatisfied', rating: 1 },
 		{ emoji: '😟', label: 'Dissatisfied', rating: 2 },
@@ -16,16 +27,20 @@ const SmileyRating = ({ name }) => {
 			{smileys.map((smiley, index) => {
 				const { rating, label, emoji } = smiley;
 				return (
-					<button
-						key={index}
-						onClick={() => setValue(name, rating)}
-						aria-label={label}
-						className={`text-4xl mx-2 mb-6 ${rating === ratingSelected ? 'scale-150' : 'scale-125'} hover:scale-150`}
-					>
-						{emoji}
-					</button>
+					<>
+						<button
+							key={index}
+							onClick={() => setValue(name, rating)}
+							aria-label={label}
+							className={`text-4xl mx-2 mb-6 ${rating === ratingSelected ? 'scale-150' : 'scale-125'} hover:scale-150`}
+							disabled={isSubmitting}
+						>
+							{emoji}
+						</button>
+					</>
 				);
 			})}
+			{errors[name]?.message ? <SmileyError name={name} /> : null}
 		</div>
 	);
 };

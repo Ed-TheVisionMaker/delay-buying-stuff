@@ -8,7 +8,7 @@ const StepProgressBar = ({ totalSteps }) => {
 	const currentStep = getValues('step');
 	const progressBarWidth = Math.floor((currentStep / totalSteps) * 100);
 	return (
-		<div className='w-full h-2 flex justify-start border border-black rounded-xl'>
+		<div className='w-full h-2 flex justify-start border border-black rounded-xl bg-skyBlue/50'>
 			<div
 				className={`rounded-xl bg-primary`}
 				style={{ width: progressBarWidth + '%' }}
@@ -38,8 +38,8 @@ const StepButton = ({ stepFunction }) => {
 		moveLeft: (
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
-				width={12}
-				height={12}
+				width={18}
+				height={18}
 				viewBox='0 0 24 24'
 				fill='none'
 				stroke='currentColor'
@@ -58,7 +58,7 @@ const StepButton = ({ stepFunction }) => {
 		<div className='flex'>
 			<button
 				type='submit'
-				className={` bottom-0 ${nextStep ? 'right-0' : 'left-0'}`}
+				className='mt-4 hover:font-bold'
 				onClick={() => stepFunction()}
 			>
 				{nextStep ? (
@@ -66,9 +66,9 @@ const StepButton = ({ stepFunction }) => {
 						Next<span className='ml'>{svgConfig.moveRight}</span>
 					</p>
 				) : (
-					<p className='flex items-center text-xs'>
+					<p className='flex items-center text-sm'>
 						{svgConfig.moveLeft}
-						<span className='ml'>Back</span>
+						<span className='ml-1.5'>Back</span>
 					</p>
 				)}
 			</button>
@@ -81,7 +81,7 @@ const SubmitButton = ({ nextStep, smileyRatingUsed }) => {
 		<div className='w-full'>
 			<button
 				type='submit'
-				className='w-full btn btn-primary mb-6'
+				className='w-full btn btn-primary mb-6 text-xl'
 				onClick={() => nextStep()}
 			>
 				{smileyRatingUsed ? 'Continue' : 'Submit'}
@@ -125,10 +125,11 @@ const ViewFormStep = () => {
 						{...register('item')}
 						type='text'
 						placeholder='Type your answer here...'
-						className='w-full mb-6 px-4 py-2 rounded border-2'
+						className='w-full mb-6 px-4 py-6 text-2xl rounded border-2'
 					/>
-					{/* maybe make a ternary here see Fred linked in */}
-					{errors.item && <p className='text-red-500'>{errors.item.message}</p>}
+					{errors.item ? (
+						<p className='text-red-500'>{errors.item.message}</p>
+					) : null}
 				</div>
 			),
 			stateProperty: 'item',
@@ -172,7 +173,7 @@ const ViewFormStep = () => {
 						{...register('regretBuying')}
 						type='text'
 						placeholder='Type your last regret here...'
-						className='w-full px-4 py-2 rounded border-2'
+						className='w-full mb-6 px-4 py-6 text-2xl rounded border-2'
 					/>
 				</div>
 			),
@@ -193,20 +194,10 @@ const ViewFormStep = () => {
 
 	const totalSteps = stepsConfig.length;
 
-	// const buttonAlignment = (currentStep) => {
-	// 	if (currentStep === 1) {
-	// 		return 'justify-end';
-	// 	} else if (currentStep === totalSteps) {
-	// 		return 'justify-start';
-	// 	} else {
-	// 		return 'justify-between';
-	// 	}
-	// };
-
 	return (
 		<>
 			{
-				<div className='h-full w-3/5 bg-skyBlue/45 px-8 pt-12 shadow-md shadow-skyBlue/50 rounded-xl text-center'>
+				<div className='h-full w-3/5 px-8 pt-12 rounded-xl mb-12 text-center'>
 					<div
 						key={stepsConfig[currentStep - 1].stateProperty}
 						className='h-full w-full flex flex-col justify-between text-xl'
@@ -228,9 +219,6 @@ const ViewFormStep = () => {
 								{currentStep > 1 ? (
 									<StepButton stepFunction={prevStep} />
 								) : null}
-								{/* {currentStep < stepsConfig.length ? (
-									<StepButton stepFunction={nextStep} />
-								) : null} */}
 							</div>
 						</div>
 						{/* <pre>{JSON.stringify(getValues(), null, 2)}</pre> */}
