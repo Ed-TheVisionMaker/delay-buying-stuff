@@ -8,7 +8,7 @@ const StepProgressBar = ({ totalSteps }) => {
 	const currentStep = getValues('step');
 	const progressBarWidth = Math.floor((currentStep / totalSteps) * 100);
 	return (
-		<div className='w-full h-2 flex justify-start mt-4 border border-black rounded-xl'>
+		<div className='w-full h-2 flex justify-start border border-black rounded-xl'>
 			<div
 				className={`rounded-xl bg-red-700`}
 				style={{ width: progressBarWidth + '%' }}
@@ -22,7 +22,7 @@ const StepButton = ({ stepFunction }) => {
 	return (
 		<button
 			type='submit'
-			className={`absolute border border-black px-4 py rounded-xl ${nextStep ? 'right-0' : 'left-0'}`}
+			className={`absolute border border-black px-4 py rounded-xl bottom-0 ${nextStep ? 'right-0' : 'left-0'}`}
 			onClick={() => stepFunction()}
 		>
 			{nextStep ? 'Next' : 'Prev'}
@@ -127,25 +127,31 @@ const ViewFormStep = () => {
 	return (
 		<>
 			{
-				<div
-					key={stepsConfig[currentStep - 1].stateProperty}
-					className='flex flex-col items-center justify-center border-2 border-neutral p-8'
-				>
-					{stepsConfig[currentStep - 1].questionElement}
-					{stepsConfig[currentStep - 1].smileyRatingUsed === true ? (
-						<SmileyRating
-							nextStep={nextStep}
-							name={stepsConfig[currentStep - 1].stateProperty}
-						/>
-					) : null}
-					<StepProgressBar totalSteps={totalSteps} />
-					<div className='relative w-full mt-4'>
-						{currentStep > 1 ? <StepButton stepFunction={prevStep} /> : null}
-						{currentStep < stepsConfig.length ? (
-							<StepButton stepFunction={nextStep} />
+				<div className=' h-96 w-96'>
+					<div
+						key={stepsConfig[currentStep - 1].stateProperty}
+						className='h-full w-full flex flex-col items-center justify-between border-2 border-neutral p-8 rounded-xl shadow-xl shadow-orange-300'
+					>
+						{stepsConfig[currentStep - 1].questionElement}
+						{stepsConfig[currentStep - 1].smileyRatingUsed === true ? (
+							<SmileyRating
+								nextStep={nextStep}
+								name={stepsConfig[currentStep - 1].stateProperty}
+							/>
 						) : null}
+						<div className='w-full '>
+							<div className='relative w-full mb-4'>
+								{currentStep > 1 ? (
+									<StepButton stepFunction={prevStep} />
+								) : null}
+								{currentStep < stepsConfig.length ? (
+									<StepButton stepFunction={nextStep} />
+								) : null}
+							</div>
+							<StepProgressBar totalSteps={totalSteps} />
+						</div>
+						{/* <pre>{JSON.stringify(getValues(), null, 2)}</pre> */}
 					</div>
-					{/* <pre>{JSON.stringify(getValues(), null, 2)}</pre> */}
 				</div>
 			}
 		</>
