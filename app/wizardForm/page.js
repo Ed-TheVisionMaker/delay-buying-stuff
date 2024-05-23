@@ -33,7 +33,7 @@ const WizardForm = () => {
 			step: 1,
 			item: '',
 			regretBuying: '',
-			withOutItem: 0,
+			withoutItem: 0,
 			lifeChange: 0,
 			reallyChangeLife: 0,
 			neverOwned: 0

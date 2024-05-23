@@ -18,13 +18,14 @@ const StepProgressBar = ({ totalSteps }) => {
 };
 
 const StepButton = ({ stepFunction }) => {
+	const nextStep = stepFunction.name === 'nextStep';
 	return (
 		<button
 			type='submit'
-			className='border border-black px-4 py rounded-xl'
+			className={`absolute border border-black px-4 py rounded-xl ${nextStep ? 'right-0' : 'left-0'}`}
 			onClick={() => stepFunction()}
 		>
-			{stepFunction.name === 'nextStep' ? 'Next' : 'Prev'}
+			{nextStep ? 'Next' : 'Prev'}
 		</button>
 	);
 };
@@ -138,13 +139,13 @@ const ViewFormStep = () => {
 						/>
 					) : null}
 					<StepProgressBar totalSteps={totalSteps} />
-					<div className='w-full flex justify-between mt-4'>
+					<div className='relative w-full mt-4'>
 						{currentStep > 1 ? <StepButton stepFunction={prevStep} /> : null}
 						{currentStep < stepsConfig.length ? (
 							<StepButton stepFunction={nextStep} />
 						) : null}
 					</div>
-					<pre>{JSON.stringify(getValues(), null, 2)}</pre>
+					{/* <pre>{JSON.stringify(getValues(), null, 2)}</pre> */}
 				</div>
 			}
 		</>
