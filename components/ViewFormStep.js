@@ -8,7 +8,7 @@ const StepProgressBar = ({ totalSteps }) => {
 	const currentStep = getValues('step');
 	const progressBarWidth = Math.floor((currentStep / totalSteps) * 100);
 	return (
-		<div className='w-full h-2 flex justify-startmt-4 border border-black rounded-xl'>
+		<div className='w-full h-2 flex justify-start mt-4 border border-black rounded-xl'>
 			<div
 				className={`rounded-xl bg-red-700`}
 				style={{ width: progressBarWidth + '%' }}
@@ -67,14 +67,6 @@ const ViewFormStep = () => {
 					/>
 					{/* maybe make a ternary here see Fred linked in */}
 					{errors.item && <p className='text-red-500'>{errors.item.message}</p>}
-					<button
-						type='submit'
-						disabled={isSubmitting}
-						className='px-4 py-2 rounded'
-						onClick={() => nextStep()}
-					>
-						next
-					</button>
 				</div>
 			),
 			stateProperty: 'item',
@@ -112,14 +104,6 @@ const ViewFormStep = () => {
 						placeholder='The last regret...'
 						className='px-4 py-2 rounded border-2'
 					/>
-					<button
-						type='submit'
-						disabled={isSubmitting}
-						className='px-4 py-2 rounded'
-						onClick={() => nextStep()}
-					>
-						next
-					</button>
 				</div>
 			),
 			stateProperty: 'regretBuying',
@@ -154,11 +138,11 @@ const ViewFormStep = () => {
 						/>
 					) : null}
 					<StepProgressBar totalSteps={totalSteps} />
-					<div className='flex'>
+					<div className='w-full flex justify-between mt-4'>
+						{currentStep > 1 ? <StepButton stepFunction={prevStep} /> : null}
 						{currentStep < stepsConfig.length ? (
 							<StepButton stepFunction={nextStep} />
 						) : null}
-						{currentStep > 1 ? <StepButton stepFunction={prevStep} /> : null}
 					</div>
 					<pre>{JSON.stringify(getValues(), null, 2)}</pre>
 				</div>
