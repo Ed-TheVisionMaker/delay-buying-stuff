@@ -130,7 +130,7 @@ const ViewFormStep = () => {
 				<div className=' h-96 w-96'>
 					<div
 						key={stepsConfig[currentStep - 1].stateProperty}
-						className='h-full w-full flex flex-col items-center justify-between border-2 border-neutral p-8 rounded-xl shadow-xl shadow-orange-300'
+						className='h-full w-full flex flex-col items-center justify-between border-2 border-neutral p-8 rounded-xl shadow-xl shadow-orange-300 text-xl'
 					>
 						{stepsConfig[currentStep - 1].questionElement}
 						{stepsConfig[currentStep - 1].smileyRatingUsed === true ? (

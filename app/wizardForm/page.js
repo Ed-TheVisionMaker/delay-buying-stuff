@@ -50,14 +50,17 @@ const WizardForm = () => {
 	};
 
 	return (
-		<FormProvider {...methods}>
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-				className='h-screen flex flex-col items-center justify-center'
-			>
-				<ViewFormStep />
-			</form>
-		</FormProvider>
+		<div className='w-screen h-screen flex flex-col items-center justify-center'>
+			<h1 className='mb-24 text-3xl'>Impulse Buy SOS</h1>
+			<FormProvider {...methods}>
+				<form
+					onSubmit={handleSubmit(onSubmit)}
+					className='flex flex-col items-center justify-center'
+				>
+					<ViewFormStep />
+				</form>
+			</FormProvider>
+		</div>
 	);
 };
 
