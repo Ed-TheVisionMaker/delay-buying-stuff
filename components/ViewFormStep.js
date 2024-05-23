@@ -1,7 +1,7 @@
 import SmileyRating from './SmileyRating';
 import { useFormContext } from 'react-hook-form';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const StepProgressBar = ({ totalSteps }) => {
 	const { getValues } = useFormContext();
@@ -32,6 +32,10 @@ const ViewFormStep = () => {
 			setValue('step', currentStep + 1);
 		}
 	};
+
+	useEffect(() => {
+		const step = getValues('step');
+	}, []);
 
 	const stepsConfig = [
 		{
