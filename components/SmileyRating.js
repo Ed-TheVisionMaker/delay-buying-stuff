@@ -20,7 +20,7 @@ const SmileyRating = ({ name }) => {
 						key={index}
 						onClick={() => setValue(name, rating)}
 						aria-label={label}
-						className={`text-4xl ${rating === ratingSelected ? 'scale-150' : ''} mx-2 hover:scale-150`}
+						className={`text-4xl mx-2 mb-6 ${rating === ratingSelected ? 'scale-150' : 'scale-125'} hover:scale-150`}
 					>
 						{emoji}
 					</button>

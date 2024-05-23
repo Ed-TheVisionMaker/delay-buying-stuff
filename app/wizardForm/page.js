@@ -48,8 +48,8 @@ const WizardForm = () => {
 	};
 
 	return (
-		<div className='w-screen h-screen flex flex-col items-center justify-center'>
-			<h1 className='mb-24 text-3xl'>Impulse Buy SOS</h1>
+		<div className='w-screen h-screen flex flex-col items-center bg-skyBlue/40'>
+			<h1 className='my-24 text-5xl '>Impulse Buy SOS</h1>
 			<FormProvider {...methods}>
 				<form
 					onSubmit={handleSubmit(onSubmit)}

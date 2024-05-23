@@ -10,7 +10,7 @@ const StepProgressBar = ({ totalSteps }) => {
 	return (
 		<div className='w-full h-2 flex justify-start border border-black rounded-xl'>
 			<div
-				className={`rounded-xl bg-red-700`}
+				className={`rounded-xl bg-primary`}
 				style={{ width: progressBarWidth + '%' }}
 			></div>
 		</div>
@@ -81,7 +81,7 @@ const SubmitButton = ({ nextStep, smileyRatingUsed }) => {
 		<div className='w-full'>
 			<button
 				type='submit'
-				className='btn w-full btn-primary'
+				className='w-full btn btn-primary mb-6'
 				onClick={() => nextStep()}
 			>
 				{smileyRatingUsed ? 'Continue' : 'Submit'}
@@ -120,12 +120,12 @@ const ViewFormStep = () => {
 		{
 			questionElement: (
 				<div className='w-full flex flex-col items-center justify-center'>
-					<h3 className='text-2xl'>What do you want to buy&#63;</h3>
+					<p className='mb-6 text-4xl'>What do you want to buy&#63;</p>
 					<input
 						{...register('item')}
 						type='text'
 						placeholder='Type your answer here...'
-						className='w-full px-4 py-2 rounded border-2'
+						className='w-full mb-6 px-4 py-2 rounded border-2'
 					/>
 					{/* maybe make a ternary here see Fred linked in */}
 					{errors.item && <p className='text-red-500'>{errors.item.message}</p>}
@@ -136,13 +136,15 @@ const ViewFormStep = () => {
 		},
 
 		{
-			questionElement: <p>How is your life without this item&#63;</p>,
+			questionElement: (
+				<p className='mb-6 text-4xl'>How is your life without this item&#63;</p>
+			),
 			stateProperty: 'withoutItem',
 			smileyRatingUsed: true
 		},
 		{
 			questionElement: (
-				<p className=''>
+				<p className='mb-6 text-4xl'>
 					In{' '}
 					<span className='bg-neutral text-neutral-content'>6 months time</span>{' '}
 					how will this item change your life&#63;
@@ -153,7 +155,9 @@ const ViewFormStep = () => {
 		},
 		{
 			questionElement: (
-				<p className=''>How will it really change your life&#63;</p>
+				<p className='mb-6 text-4xl'>
+					How will it really change your life&#63;
+				</p>
 			),
 			stateProperty: 'reallyChangeLife',
 			smileyRatingUsed: true
@@ -161,7 +165,9 @@ const ViewFormStep = () => {
 		{
 			questionElement: (
 				<div className='w-full flex flex-col'>
-					<h3>What is the last thing you regretted buying&#63;</h3>
+					<h3 className='mb-6 text-4xl'>
+						What is the last thing you regretted buying&#63;
+					</h3>
 					<input
 						{...register('regretBuying')}
 						type='text'
@@ -175,7 +181,7 @@ const ViewFormStep = () => {
 		},
 		{
 			questionElement: (
-				<p className=''>
+				<p className='mb-6 text-4xl'>
 					If you <span className='bg-neutral text-neutral-content'>never</span>{' '}
 					owned this item, what would happen to your life&#63;
 				</p>
@@ -200,10 +206,10 @@ const ViewFormStep = () => {
 	return (
 		<>
 			{
-				<div className='h-48 w-3/5 border border-black'>
+				<div className='h-full w-3/5 bg-skyBlue/45 px-8 pt-12 shadow-md shadow-skyBlue/50 rounded-xl text-center'>
 					<div
 						key={stepsConfig[currentStep - 1].stateProperty}
-						className='h-full w-full flex flex-col items-center justify-between border border-neutral p-8 rounded-xl text-xl'
+						className='h-full w-full flex flex-col justify-between text-xl'
 					>
 						{stepsConfig[currentStep - 1].questionElement}
 						{stepsConfig[currentStep - 1].smileyRatingUsed === true ? (
