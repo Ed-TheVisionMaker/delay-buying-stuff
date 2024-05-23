@@ -175,6 +175,9 @@ const ViewFormStep = () => {
 						placeholder='Type your last regret here...'
 						className='w-full mb-6 px-4 py-6 text-2xl rounded border-2'
 					/>
+					{errors.regretBuying ? (
+						<p className='text-red-500'>{errors.regretBuying.message}</p>
+					) : null}
 				</div>
 			),
 			stateProperty: 'regretBuying',

@@ -12,16 +12,23 @@ export const formSchema = z.object({
 	withoutItem: z
 		.number()
 		.min(1, 'Please select a rating')
-		.max(5, 'Invalid rating'),
-	lifeChange: z.string().min(1, 'Please enter an item here'),
+		.max(5, 'Invalid rating')
+		.nullable(),
+	lifeChange: z
+		.number()
+		.min(1, 'Please select a rating')
+		.max(5, 'Invalid rating')
+		.nullable(),
 	reallyChangeLife: z
 		.number()
 		.min(1, 'Please select a rating')
-		.max(5, 'Invalid rating'),
+		.max(5, 'Invalid rating')
+		.nullable(),
 	neverOwned: z
 		.number()
 		.min(1, 'Please select a rating')
 		.max(5, 'Invalid rating')
+		.nullable()
 });
 
 const WizardForm = () => {
@@ -31,10 +38,10 @@ const WizardForm = () => {
 			step: 1,
 			item: '',
 			regretBuying: '',
-			withoutItem: 0,
-			lifeChange: 0,
-			reallyChangeLife: 0,
-			neverOwned: 0
+			withoutItem: null,
+			lifeChange: null,
+			reallyChangeLife: null,
+			neverOwned: null
 		}
 	});
 

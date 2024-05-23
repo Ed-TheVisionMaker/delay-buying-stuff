@@ -4,7 +4,9 @@ const SmileyError = ({ name }) => {
 	const {
 		formState: { errors }
 	} = useFormContext();
-	return <p className='text-red-500'>{errors[name].message}</p>;
+
+	console.log(errors, ' name SMileyError');
+	return <p className='text-red-500'>{errors[name]?.message}</p>;
 };
 const SmileyRating = ({ name }) => {
 	const {
@@ -20,7 +22,10 @@ const SmileyRating = ({ name }) => {
 		{ emoji: '😊', label: 'Very Satisfied', rating: 5 }
 	];
 
-	const ratingSelected = getValues(name);
+	const ratingSelected = getValues(name) || null;
+
+	const ratingIsSelected = ratingSelected !== null;
+	// console.log(ratingIsSelected, "rating is sledcted")
 
 	return (
 		<div className='w-full flex justify-evenly mt-4'>
@@ -40,7 +45,7 @@ const SmileyRating = ({ name }) => {
 					</>
 				);
 			})}
-			{errors[name]?.message ? <SmileyError name={name} /> : null}
+			{ratingIsSelected ? null : <SmileyError name={name} />}
 		</div>
 	);
 };
