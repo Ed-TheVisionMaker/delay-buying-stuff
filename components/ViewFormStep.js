@@ -53,21 +53,22 @@ const StepButton = ({ stepFunction }) => {
 		)
 	};
 	const nextStep = stepFunction.name === 'nextStep';
+
 	return (
 		<div className='flex'>
 			<button
 				type='submit'
-				className={`border border-black px-4 py rounded-xl bottom-0 ${nextStep ? 'right-0' : 'left-0'}`}
+				className={` bottom-0 ${nextStep ? 'right-0' : 'left-0'}`}
 				onClick={() => stepFunction()}
 			>
 				{nextStep ? (
-					<p className='flex items-center text-sm'>
-						Next<span className='mr-l'>{svgConfig.moveRight}</span>
+					<p className='flex items-center text-xs'>
+						Next<span className='ml'>{svgConfig.moveRight}</span>
 					</p>
 				) : (
-					<p className='flex items-center text-sm'>
+					<p className='flex items-center text-xs'>
 						{svgConfig.moveLeft}
-						<span className='ml-2'>Back</span>
+						<span className='ml'>Back</span>
 					</p>
 				)}
 			</button>
@@ -188,7 +189,8 @@ const ViewFormStep = () => {
 							/>
 						) : null}
 						<div className='w-full '>
-							<div className='w-full mb-4'>
+							<StepProgressBar totalSteps={totalSteps} />
+							<div className='w-full flex justify-between mb-4'>
 								{currentStep > 1 ? (
 									<StepButton stepFunction={prevStep} />
 								) : null}
@@ -196,7 +198,6 @@ const ViewFormStep = () => {
 									<StepButton stepFunction={nextStep} />
 								) : null}
 							</div>
-							<StepProgressBar totalSteps={totalSteps} />
 						</div>
 						{/* <pre>{JSON.stringify(getValues(), null, 2)}</pre> */}
 					</div>
