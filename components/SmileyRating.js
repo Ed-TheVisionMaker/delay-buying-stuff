@@ -12,7 +12,7 @@ const SmileyRating = ({ name }) => {
 	const ratingSelected = getValues(name);
 
 	return (
-		<div className='flex justify-center mt-4'>
+		<div className='w-full flex justify-evenly mt-4'>
 			{smileys.map((smiley, index) => {
 				const { rating, label, emoji } = smiley;
 				return (
@@ -20,7 +20,7 @@ const SmileyRating = ({ name }) => {
 						key={index}
 						onClick={() => setValue(name, rating)}
 						aria-label={label}
-						className={`text-4xl ${rating === ratingSelected ? 'scale-125' : ''} mx-2 hover:scale-125`}
+						className={`text-4xl ${rating === ratingSelected ? 'scale-150' : ''} mx-2 hover:scale-150`}
 					>
 						{emoji}
 					</button>

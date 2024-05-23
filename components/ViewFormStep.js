@@ -76,7 +76,7 @@ const StepButton = ({ stepFunction }) => {
 	);
 };
 
-const SubmitButton = ({ nextStep }) => {
+const SubmitButton = ({ nextStep, smileyRatingUsed }) => {
 	return (
 		<div className='w-full'>
 			<button
@@ -84,7 +84,7 @@ const SubmitButton = ({ nextStep }) => {
 				className='btn w-full btn-primary'
 				onClick={() => nextStep()}
 			>
-				Submit
+				{smileyRatingUsed ? 'Continue' : 'Submit'}
 			</button>
 		</div>
 	);
@@ -119,13 +119,13 @@ const ViewFormStep = () => {
 	const stepsConfig = [
 		{
 			questionElement: (
-				<div className='flex flex-col items-center justify-center'>
+				<div className='w-full flex flex-col items-center justify-center'>
 					<h3 className='text-2xl'>What do you want to buy&#63;</h3>
 					<input
 						{...register('item')}
 						type='text'
 						placeholder='Type your answer here...'
-						className='px-4 py-2 rounded border-2'
+						className='w-full px-4 py-2 rounded border-2'
 					/>
 					{/* maybe make a ternary here see Fred linked in */}
 					{errors.item && <p className='text-red-500'>{errors.item.message}</p>}
@@ -160,13 +160,13 @@ const ViewFormStep = () => {
 		},
 		{
 			questionElement: (
-				<div className='flex flex-col'>
+				<div className='w-full flex flex-col'>
 					<h3>What is the last thing you regretted buying&#63;</h3>
 					<input
 						{...register('regretBuying')}
 						type='text'
 						placeholder='Type your last regret here...'
-						className='px-4 py-2 rounded border-2'
+						className='w-full px-4 py-2 rounded border-2'
 					/>
 				</div>
 			),
@@ -200,7 +200,7 @@ const ViewFormStep = () => {
 	return (
 		<>
 			{
-				<div className='h-48'>
+				<div className='h-48 w-3/5 border border-black'>
 					<div
 						key={stepsConfig[currentStep - 1].stateProperty}
 						className='h-full w-full flex flex-col items-center justify-between border border-neutral p-8 rounded-xl text-xl'
@@ -212,7 +212,10 @@ const ViewFormStep = () => {
 								name={stepsConfig[currentStep - 1].stateProperty}
 							/>
 						) : null}
-						<SubmitButton nextStep={nextStep} />
+						<SubmitButton
+							nextStep={nextStep}
+							smileyRatingUsed={stepsConfig[currentStep - 1].smileyRatingUsed}
+						/>
 						<div className='w-full'>
 							<StepProgressBar totalSteps={totalSteps} />
 							<div className={`w-full flex justify-start mb-4`}>
