@@ -76,6 +76,20 @@ const StepButton = ({ stepFunction }) => {
 	);
 };
 
+const SubmitButton = ({ nextStep }) => {
+	return (
+		<div className='w-full'>
+			<button
+				type='submit'
+				className='btn w-full btn-primary'
+				onClick={() => nextStep()}
+			>
+				Submit
+			</button>
+		</div>
+	);
+};
+
 const ViewFormStep = () => {
 	const {
 		getValues,
@@ -173,6 +187,16 @@ const ViewFormStep = () => {
 
 	const totalSteps = stepsConfig.length;
 
+	// const buttonAlignment = (currentStep) => {
+	// 	if (currentStep === 1) {
+	// 		return 'justify-end';
+	// 	} else if (currentStep === totalSteps) {
+	// 		return 'justify-start';
+	// 	} else {
+	// 		return 'justify-between';
+	// 	}
+	// };
+
 	return (
 		<>
 			{
@@ -188,15 +212,16 @@ const ViewFormStep = () => {
 								name={stepsConfig[currentStep - 1].stateProperty}
 							/>
 						) : null}
-						<div className='w-full '>
+						<SubmitButton nextStep={nextStep} />
+						<div className='w-full'>
 							<StepProgressBar totalSteps={totalSteps} />
-							<div className='w-full flex justify-between mb-4'>
+							<div className={`w-full flex justify-start mb-4`}>
 								{currentStep > 1 ? (
 									<StepButton stepFunction={prevStep} />
 								) : null}
-								{currentStep < stepsConfig.length ? (
+								{/* {currentStep < stepsConfig.length ? (
 									<StepButton stepFunction={nextStep} />
-								) : null}
+								) : null} */}
 							</div>
 						</div>
 						{/* <pre>{JSON.stringify(getValues(), null, 2)}</pre> */}

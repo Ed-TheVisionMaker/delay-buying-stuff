@@ -24,8 +24,6 @@ export const formSchema = z.object({
 		.max(5, 'Invalid rating')
 });
 
-// setup a viewer that accepts an array of components
-
 const WizardForm = () => {
 	const methods = useForm({
 		resolver: zodResolver(formSchema),
