@@ -78,10 +78,10 @@ const StepButton = ({ stepFunction }) => {
 
 const SubmitButton = ({ nextStep, smileyRatingUsed }) => {
 	return (
-		<div className='w-full'>
+		<div className=''>
 			<button
 				type='submit'
-				className='w-full btn btn-primary mb-6 text-xl'
+				className='btn btn-wide btn-primary mb-6 text-xl'
 				onClick={() => nextStep()}
 			>
 				{smileyRatingUsed ? 'Continue' : 'Submit'}
