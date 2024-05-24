@@ -5,7 +5,7 @@ const SmileyError = ({ name }) => {
 		formState: { errors }
 	} = useFormContext();
 
-	console.log(errors, ' name SMileyError');
+	console.log(errors.name, ' errors name SMileyError');
 	return <p className='text-red-500'>{errors[name]?.message}</p>;
 };
 const SmileyRating = ({ name }) => {
@@ -27,24 +27,24 @@ const SmileyRating = ({ name }) => {
 	const ratingIsSelected = ratingSelected !== null;
 
 	return (
-		<div className='w-full flex justify-between mt-4 mb-6 border border-pink-400'>
-			{smileys.map((smiley, index) => {
-				const { rating, label, emoji } = smiley;
-				return (
-					<button
-						key={index}
-						onClick={() => setValue(name, rating)}
-						aria-label={label}
-						className={`w-fit border border-pink-400 text-5xl`}
-						// className={`w-fit border border-pink-400 text-5xl ${rating === ratingSelected ? 'scale-150' : 'scale-125'} hover:scale-150`}
-						disabled={isSubmitting}
-					>
-						{/* {emoji} */}
-						{rating}
-					</button>
-				);
-			})}
-			{/* {ratingIsSelected ? null : <SmileyError name={name} />} */}
+		<div className='w-full flex flex-col items-center'>
+			<div className='w-full flex justify-between mt-4 mb-6 '>
+				{smileys.map((smiley, index) => {
+					const { rating, label, emoji } = smiley;
+					return (
+						<button
+							key={index}
+							onClick={() => setValue(name, rating)}
+							aria-label={label}
+							className={`w-fit text-5xl ${rating === ratingSelected ? 'scale-150' : 'scale-125'} hover:scale-150`}
+							disabled={isSubmitting}
+						>
+							{emoji}
+						</button>
+					);
+				})}
+			</div>
+			<div>{ratingIsSelected ? null : <SmileyError name={name} />}</div>
 		</div>
 	);
 };

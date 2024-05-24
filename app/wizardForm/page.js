@@ -50,8 +50,22 @@ const WizardForm = () => {
 		formState: { errors, isSubmitting }
 	} = methods;
 
-	const onSubmit = (data) => {
-		console.log('form data', data);
+	const onSubmit = () => {
+		console.log('onSubmit Triggerd');
+		const step = getValues('step');
+		switch (step) {
+			case 1:
+				// Validate fields for step 1 (e.g., 'item')
+				methods.trigger('item');
+				break;
+			case 2:
+				// Validate fields for step 2 (e.g., 'withoutItem')
+				methods.trigger('withoutItem');
+				break;
+			// Repeat for other steps...
+			default:
+				break;
+		}
 	};
 
 	return (

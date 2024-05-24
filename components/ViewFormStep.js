@@ -8,7 +8,7 @@ const StepProgressBar = ({ totalSteps }) => {
 	const currentStep = getValues('step');
 	const progressBarWidth = Math.floor((currentStep / totalSteps) * 100);
 	return (
-		<div className='w-full h-2 flex justify-start border border-black rounded-xl bg-skyBlue/50'>
+		<div className='w-full h-6 flex justify-start mt-24 border-2 border-skyBlue rounded-xl bg-skyBlue/40'>
 			<div
 				className={`rounded-xl bg-primary`}
 				style={{ width: progressBarWidth + '%' }}
@@ -77,12 +77,22 @@ const StepButton = ({ stepFunction }) => {
 };
 
 const SubmitButton = ({ nextStep, smileyRatingUsed }) => {
+	const {
+		formState: { errors }
+	} = useFormContext();
+
+	const handleStepChange = () => {
+		console.log(errors, 'errors in handlestepchange');
+		if (!errors) {
+			nextStep();
+		}
+	};
 	return (
 		<div className=''>
 			<button
 				type='submit'
 				className='btn btn-wide btn-primary mb-6 text-xl'
-				onClick={() => nextStep()}
+				onClick={() => handleStepChange()}
 			>
 				{smileyRatingUsed ? 'Continue' : 'Submit'}
 			</button>
@@ -199,35 +209,31 @@ const ViewFormStep = () => {
 
 	return (
 		<>
-			{
-				<div className='h-full w-3/5 px-8 pt-12 rounded-xl mb-12 bg-skyBlue/40 border-2 border-skyBlue shadow-xl shadow-skyBlue text-center'>
-					<div
-						key={stepsConfig[currentStep - 1].stateProperty}
-						className='h-full w-full flex flex-col items-center text-xl'
-					>
-						{stepsConfig[currentStep - 1].questionElement}
-						{stepsConfig[currentStep - 1].smileyRatingUsed === true ? (
-							<SmileyRating
-								nextStep={nextStep}
-								name={stepsConfig[currentStep - 1].stateProperty}
-							/>
-						) : null}
-						<SubmitButton
+			<div className='h-full w-3/5 px-8 pt-12 rounded-xl mb-12 bg-skyBlue/40 border-2 border-skyBlue shadow-xl shadow-skyBlue text-center'>
+				<div
+					key={stepsConfig[currentStep - 1].stateProperty}
+					className='h-full w-full flex flex-col items-center text-xl'
+				>
+					{stepsConfig[currentStep - 1].questionElement}
+					{stepsConfig[currentStep - 1].smileyRatingUsed === true ? (
+						<SmileyRating
 							nextStep={nextStep}
-							smileyRatingUsed={stepsConfig[currentStep - 1].smileyRatingUsed}
+							name={stepsConfig[currentStep - 1].stateProperty}
 						/>
-						<div className='w-full'>
-							<StepProgressBar totalSteps={totalSteps} />
-							<div className={`w-full flex justify-start mb-4`}>
-								{currentStep > 1 ? (
-									<StepButton stepFunction={prevStep} />
-								) : null}
-							</div>
+					) : null}
+					<SubmitButton
+						nextStep={nextStep}
+						smileyRatingUsed={stepsConfig[currentStep - 1].smileyRatingUsed}
+					/>
+					<div className='w-full'>
+						<StepProgressBar totalSteps={totalSteps} />
+						<div className={`w-full flex justify-start mb-4`}>
+							{currentStep > 1 ? <StepButton stepFunction={prevStep} /> : null}
 						</div>
-						{/* <pre>{JSON.stringify(getValues(), null, 2)}</pre> */}
 					</div>
+					{/* <pre>{JSON.stringify(getValues(), null, 2)}</pre> */}
 				</div>
-			}
+			</div>
 		</>
 	);
 };
