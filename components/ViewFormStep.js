@@ -200,7 +200,7 @@ const ViewFormStep = () => {
 	return (
 		<>
 			{
-				<div className='h-full w-3/5 px-8 pt-12 rounded-xl mb-12 text-center'>
+				<div className='h-full w-3/5 px-8 pt-12 rounded-xl mb-12 bg-skyBlue/40 border-2 border-skyBlue shadow-xl shadow-skyBlue text-center'>
 					<div
 						key={stepsConfig[currentStep - 1].stateProperty}
 						className='h-full w-full flex flex-col items-center text-xl'

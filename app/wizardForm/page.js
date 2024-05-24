@@ -55,7 +55,7 @@ const WizardForm = () => {
 	};
 
 	return (
-		<div className='w-screen h-screen bg-skyBlue/40'>
+		<div className='w-screen h-screen'>
 			<h1 className='ml-12 pt-6 pb-24 font-bold text-2xl '>Impulse Buy SOS</h1>
 			<FormProvider {...methods}>
 				<form

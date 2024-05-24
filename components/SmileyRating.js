@@ -35,14 +35,16 @@ const SmileyRating = ({ name }) => {
 						key={index}
 						onClick={() => setValue(name, rating)}
 						aria-label={label}
-						className={`w-fit border border-pink-400 text-5xl ${rating === ratingSelected ? 'scale-150' : 'scale-125'} hover:scale-150`}
+						className={`w-fit border border-pink-400 text-5xl`}
+						// className={`w-fit border border-pink-400 text-5xl ${rating === ratingSelected ? 'scale-150' : 'scale-125'} hover:scale-150`}
 						disabled={isSubmitting}
 					>
-						{emoji}
+						{/* {emoji} */}
+						{rating}
 					</button>
 				);
 			})}
-			{ratingIsSelected ? null : <SmileyError name={name} />}
+			{/* {ratingIsSelected ? null : <SmileyError name={name} />} */}
 		</div>
 	);
 };
