@@ -20,16 +20,13 @@ const WizardForm = () => {
 	const {
 		getValues,
 		setValue,
-		trigger,
 		handleSubmit,
-		formState: { errors, isSubmitting }
 	} = methods;
 
 		const onSubmit = async () => {
 			const step = getValues('step');
-			let valid = false;
-			console.log(valid, 'valid')
-			if(valid) setValue
+			setValue('step', step + 1)
+			
 		};
 
 	return (
