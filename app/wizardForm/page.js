@@ -1,39 +1,10 @@
 'use client';
 import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import ViewFormStep from '@/components/WizardForm/ViewFormStep';
-
-// the null values are causing problems.
-// the zod needs to throw an error if the value of null is stil present
-// at the moment it is throwing errors from the start.
-
-export const formSchema = z.object({
-    step: z.number(),
-    item: z.string().min(1, 'Please enter an item here'),
-    regretBuying: z.string().min(1, 'Please enter an item here'),
-    withoutItem: z.union([
-        z.number().min(1, 'Please select a rating').max(5, 'Invalid rating'),
-        z.null(),
-    ]),
-    lifeChange: z.union([
-        z.number().min(1, 'Please select a rating').max(5, 'Invalid rating'),
-        z.null(),
-    ]),
-    reallyChangeLife: z.union([
-        z.number().min(1, 'Please select a rating').max(5, 'Invalid rating'),
-        z.null(),
-    ]),
-    neverOwned: z.union([
-        z.number().min(1, 'Please select a rating').max(5, 'Invalid rating'),
-        z.null(),
-    ]),
-});
+import ViewFormStep from '@/components/WizardForm/ViewFormStep';``
 
 const WizardForm = () => {
 	const methods = useForm({
-		// resolver: zodResolver(formSchema),
 		defaultValues: {
 			step: 1,
 			item: '',
