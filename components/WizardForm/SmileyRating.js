@@ -5,7 +5,7 @@ const SmileyError = ({ name }) => {
 		formState: { errors }
 	} = useFormContext();
 
-	console.log(errors.name, ' errors name SMileyError');
+	// console.log(errors.name, ' errors name SMileyError');
 	return <p className='text-red-500'>{errors[name]?.message}</p>;
 };
 const SmileyRating = ({ name }) => {

@@ -81,18 +81,18 @@ const SubmitButton = ({ nextStep, smileyRatingUsed }) => {
 		formState: { errors }
 	} = useFormContext();
 
-	const handleStepChange = () => {
-		console.log(errors, 'errors in handlestepchange');
-		if (!errors) {
-			nextStep();
-		}
-	};
+	// const handleStepChange = () => {
+	// 	console.log(errors, 'errors in handlestepchange');
+	// 	nextStep();
+	// 	if (!errors) {
+	// 	}
+	// };
 	return (
 		<div className=''>
 			<button
 				type='submit'
 				className='btn btn-wide btn-primary mb-6 text-xl'
-				onClick={() => handleStepChange()}
+				// onClick={() => handleStepChange()}	
 			>
 				{smileyRatingUsed ? 'Continue' : 'Submit'}
 			</button>
@@ -111,6 +111,7 @@ const ViewFormStep = () => {
 	const currentStep = getValues('step');
 
 	const nextStep = () => {
+		console.log('next step triggere')
 		if (currentStep < stepsConfig.length) {
 			setValue('step', currentStep + 1);
 		}

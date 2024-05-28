@@ -3,37 +3,37 @@ import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import ViewFormStep from '@/components/ViewFormStep';
+import ViewFormStep from '@/components/WizardForm/ViewFormStep';
+
+// the null values are causing problems.
+// the zod needs to throw an error if the value of null is stil present
+// at the moment it is throwing errors from the start.
 
 export const formSchema = z.object({
-	step: z.number(),
-	item: z.string().min(1, 'Please enter an item here'),
-	regretBuying: z.string().min(1, 'Please enter an item here'),
-	withoutItem: z
-		.number()
-		.min(1, 'Please select a rating')
-		.max(5, 'Invalid rating')
-		.nullable(),
-	lifeChange: z
-		.number()
-		.min(1, 'Please select a rating')
-		.max(5, 'Invalid rating')
-		.nullable(),
-	reallyChangeLife: z
-		.number()
-		.min(1, 'Please select a rating')
-		.max(5, 'Invalid rating')
-		.nullable(),
-	neverOwned: z
-		.number()
-		.min(1, 'Please select a rating')
-		.max(5, 'Invalid rating')
-		.nullable()
+    step: z.number(),
+    item: z.string().min(1, 'Please enter an item here'),
+    regretBuying: z.string().min(1, 'Please enter an item here'),
+    withoutItem: z.union([
+        z.number().min(1, 'Please select a rating').max(5, 'Invalid rating'),
+        z.null(),
+    ]),
+    lifeChange: z.union([
+        z.number().min(1, 'Please select a rating').max(5, 'Invalid rating'),
+        z.null(),
+    ]),
+    reallyChangeLife: z.union([
+        z.number().min(1, 'Please select a rating').max(5, 'Invalid rating'),
+        z.null(),
+    ]),
+    neverOwned: z.union([
+        z.number().min(1, 'Please select a rating').max(5, 'Invalid rating'),
+        z.null(),
+    ]),
 });
 
 const WizardForm = () => {
 	const methods = useForm({
-		resolver: zodResolver(formSchema),
+		// resolver: zodResolver(formSchema),
 		defaultValues: {
 			step: 1,
 			item: '',
@@ -45,28 +45,21 @@ const WizardForm = () => {
 		}
 	});
 
+
 	const {
+		getValues,
+		setValue,
+		trigger,
 		handleSubmit,
 		formState: { errors, isSubmitting }
 	} = methods;
 
-	const onSubmit = () => {
-		console.log('onSubmit Triggerd');
-		const step = getValues('step');
-		switch (step) {
-			case 1:
-				// Validate fields for step 1 (e.g., 'item')
-				methods.trigger('item');
-				break;
-			case 2:
-				// Validate fields for step 2 (e.g., 'withoutItem')
-				methods.trigger('withoutItem');
-				break;
-			// Repeat for other steps...
-			default:
-				break;
-		}
-	};
+		const onSubmit = async () => {
+			const step = getValues('step');
+			let valid = false;
+			console.log(valid, 'valid')
+			if(valid) setValue
+		};
 
 	return (
 		<div className='w-screen h-screen'>
@@ -84,32 +77,3 @@ const WizardForm = () => {
 };
 
 export default WizardForm;
-
-// setting up server side validation
-
-// const onSubmit = async (data) => {
-// 	// remember to setup the api client when the login is setup: https://shipfa.st/docs/tutorials/api-call
-// 	const response = await fetch('/api/submitForm', {
-// 		method: 'POST',
-// 		body: JSON.stringify(data),
-// 		headers: {
-// 			'Content-Type': 'application/json'
-
-// 		}
-// 	});
-// 	const responseData = await response.json();
-// 	if (!response.ok) {
-// 		alert('Submitting Form Failed!');
-// 		return;
-// 	}
-
-// 	if (responseData.errors) {
-// 		if (errors.item) {
-// 			setError('item', {
-// 				type: 'server',
-// 				message: errors.item
-// 			});
-// 		}
-// 	}
-// 	reset();
-// };
