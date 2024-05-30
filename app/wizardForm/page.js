@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import ViewFormStep from '@/components/WizardForm/ViewFormStep';``
+import ViewFormStep from '@/components/WizardForm/ViewFormStep';
 
 const WizardForm = () => {
 	const methods = useForm({

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
+import React from 'react';
+import { useFormContext, useWatch } from 'react-hook-form';
 import SmileyRating from './SmileyRating';
 import StepProgressBar from './StepProgressBar';
 import StepButton from './StepButton';
@@ -7,30 +7,25 @@ import SubmitButton from './SubmitButton';
 
 const ViewFormStep = () => {
 	const {
-		getValues,
 		setValue,
 		register,
+		control,
 		formState: { errors, isSubmitting }
 	} = useFormContext();
 
-	const currentStep = getValues('step');
+	const currentStep = useWatch({ control, name: 'step' });
 
 	const nextStep = () => {
-		console.log('next step triggere')
 		if (currentStep < stepsConfig.length) {
 			setValue('step', currentStep + 1);
 		}
 	};
-
+	
 	const prevStep = () => {
 		if (currentStep > 1) {
 			setValue('step', currentStep - 1);
 		}
 	};
-
-	useEffect(() => {
-		const step = getValues('step');
-	}, []);
 
 	const stepsConfig = [
 		{
@@ -130,6 +125,7 @@ const ViewFormStep = () => {
 					<SubmitButton
 						nextStep={nextStep}
 						smileyRatingUsed={stepsConfig[currentStep - 1].smileyRatingUsed}
+						disabled={isSubmitting}
 					/>
 					<div className='w-full'>
 						<StepProgressBar totalSteps={totalSteps} />

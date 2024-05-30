@@ -38,7 +38,7 @@ const StepButton = ({ stepFunction }) => {
 	return (
 		<div className='flex'>
 			<button
-				type='submit'
+				type='button'
 				className='mt-4 hover:font-bold'
 				onClick={() => stepFunction()}
 			>
